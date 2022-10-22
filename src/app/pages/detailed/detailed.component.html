@@ -1,1 +1,14 @@
-<p>detailed works!</p>
+<div class="flex flex-wrap gap-4">
+  <ng-container *ngFor="let beer of beers">
+    <div class="w-80 bg-gradient-to-r from-[#f09819] to-[#edde5d]">
+      <img
+        class="w-auto h-24"
+        src="{{ beer.article.image }}"
+        alt="{{ beer.brand.brandName }}"
+      />
+      <p>{{ beer.brand.brandName }}</p>
+      <p>{{ beer.article.price }}</p>
+      <p>{{ beer.article.shortDescription }}</p>
+    </div>
+  </ng-container>
+</div>

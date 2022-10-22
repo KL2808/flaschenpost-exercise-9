@@ -1,3 +1,6 @@
-export const environment = {
-  production: true
+import { baseEnvironment, Environment } from './environment.helper';
+
+export const environment: Environment = {
+  ...baseEnvironment,
+  production: true,
 };

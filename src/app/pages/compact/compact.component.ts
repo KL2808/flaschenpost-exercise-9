@@ -1,15 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { Beer } from 'src/app/models/beer';
+import { FlapoProductsApiService } from 'src/app/shared/services/flapo-products-api/flapo-products-api.service';
 
 @Component({
   selector: 'app-compact',
   templateUrl: './compact.component.html',
-  styleUrls: ['./compact.component.scss']
 })
 export class CompactComponent implements OnInit {
+  constructor(private flapoProductsApiService: FlapoProductsApiService) {}
 
-  constructor() { }
+  beers: Beer[] = [];
 
   ngOnInit(): void {
+    this.flapoProductsApiService
+      .getBeers()
+      .subscribe((beers) => (this.beers = beers));
   }
-
 }

@@ -1,0 +1,36 @@
+<header class="shadow-xl bg-[#a50a50]">
+  <div class="container mx-auto max-w-[1260px] py-4 px-6">
+    <div class="flex items-center gap-4">
+      <img
+        class="h-8 w-auto"
+        src="./../assets/flapo.logo.svg"
+        alt="flaschenpost logo"
+      />
+      <p class="text-xl text-bold text-white">Exercise Task #9</p>
+    </div>
+  </div>
+</header>
+<nav class="shadow-xl bg-[#ffffff]">
+  <div class="container mx-auto max-w-[1260px] py-2 px-6">
+    <div class="flex items-center gap-4">
+      <ng-container *ngFor="let route of routes">
+        <ng-container *ngIf="route.title">
+          <a
+            *ngIf="route.title"
+            routerLink="{{ route.path }}"
+            routerLinkActive="active"
+            class="hover:bg-black/[.3] px-3 py-2 rounded-md text-bold text-base"
+          >
+            {{ route.title }}
+          </a>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="container mx-auto max-w-[1260px] py-6 px-6">
+    <router-outlet></router-outlet>
+  </div>
+</main>

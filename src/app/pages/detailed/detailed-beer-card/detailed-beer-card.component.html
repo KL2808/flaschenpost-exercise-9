@@ -1,0 +1,14 @@
+<ng-container *ngIf="beer">
+  <shared-card>
+    <div class="shrink-0">
+      <img class="h-16 w-auto" src="{{ beer.article.image }}" alt="{{ beer.brand.brandName }}" />
+    </div>
+    <div class="mr-2">
+      <div class="text-xl font-medium text-black">
+        {{ beer.brand.brandName }}
+      </div>
+      <p class="text-slate-500">{{ beer.article.price }} €</p>
+      <p class="text-slate-500">{{ beer.article.shortDescription }}</p>
+    </div>
+  </shared-card>
+</ng-container>

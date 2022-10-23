@@ -1,4 +1,6 @@
-<div class="pb-6 flex justify-end">
+<div class="pb-6 flex justify-end gap-4">
+  <shared-price-limit-toggle (stateChange)="onPriceLimitChange($event)">
+  </shared-price-limit-toggle>
   <shared-sort-type-toggle
     (sortTypeChange)="onSortTypeChange($event)"
   ></shared-sort-type-toggle>

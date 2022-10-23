@@ -18,6 +18,12 @@ export class DetailedComponent implements OnInit {
     this.fetchBeers();
   }
 
+  onPriceLimitChange(isPriceLimit: boolean) {
+    if (isPriceLimit) this.maxPricePerLiter = 2;
+    else this.maxPricePerLiter = undefined;
+    this.fetchBeers();
+  }
+
   onSortTypeChange(sortType: SortType) {
     this.sortType = sortType;
     this.fetchBeers();
@@ -25,7 +31,7 @@ export class DetailedComponent implements OnInit {
 
   private fetchBeers() {
     this.flapoProductsApiService
-      .getBeers(this.sortType)
+      .getBeers(this.sortType, this.maxPricePerLiter)
       .subscribe((beers) => (this.beers = beers));
   }
 }

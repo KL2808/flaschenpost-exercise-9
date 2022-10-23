@@ -12,8 +12,15 @@ export class CompactComponent implements OnInit {
 
   beers: Beer[] = [];
   sortType: SortType | undefined = undefined;
+  maxPricePerLiter: number | undefined = undefined;
 
   ngOnInit(): void {
+    this.fetchBeers();
+  }
+
+  onPriceLimitChange(isPriceLimit: boolean) {
+    if (isPriceLimit) this.maxPricePerLiter = 2;
+    else this.maxPricePerLiter = undefined;
     this.fetchBeers();
   }
 
@@ -24,7 +31,7 @@ export class CompactComponent implements OnInit {
 
   private fetchBeers() {
     this.flapoProductsApiService
-      .getBeers(this.sortType)
+      .getBeers(this.sortType, this.maxPricePerLiter)
       .subscribe((beers) => (this.beers = beers));
   }
 }

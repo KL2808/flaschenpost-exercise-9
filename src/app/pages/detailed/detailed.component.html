@@ -1,3 +1,9 @@
+<div class="pb-6 flex justify-end">
+  <shared-sort-type-toggle
+    (sortTypeChange)="onSortTypeChange($event)"
+  ></shared-sort-type-toggle>
+</div>
+
 <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
   <ng-container *ngFor="let beer of beers">
     <app-detailed-beer-card [beer]="beer"></app-detailed-beer-card>

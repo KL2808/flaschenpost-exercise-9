@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Beer } from 'src/app/models/beer';
+import { Beer } from 'src/app/shared/models/beer';
 import { FlapoProductsApiService } from 'src/app/shared/services/flapo-products-api/flapo-products-api.service';
 
 @Component({

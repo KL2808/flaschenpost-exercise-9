@@ -1,5 +1,9 @@
 <ng-container *ngIf="beer">
-    <shared-card>
-        <img class="h-24 w-auto mx-auto" src="{{ beer.article.image }}" alt="{{ beer.brand.brandName }}" />
-    </shared-card>
+  <shared-card>
+    <img
+      class="h-24 w-auto mx-auto"
+      src="{{ beer.image }}"
+      alt="{{ beer.name }}"
+    />
+  </shared-card>
 </ng-container>

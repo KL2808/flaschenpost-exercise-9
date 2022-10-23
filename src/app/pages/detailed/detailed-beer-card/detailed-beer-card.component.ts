@@ -1,4 +1,4 @@
-import { Beer } from './../../../models/beer';
+import { Beer } from '../../../shared/models/beer';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({

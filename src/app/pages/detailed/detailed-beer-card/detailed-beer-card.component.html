@@ -1,14 +1,19 @@
 <ng-container *ngIf="beer">
   <shared-card>
     <div class="shrink-0">
-      <img class="h-16 w-auto" src="{{ beer.article.image }}" alt="{{ beer.brand.brandName }}" />
+      <img class="h-16 w-auto" src="{{ beer.image }}" alt="{{ beer.name }}" />
     </div>
     <div class="mr-2">
       <div class="text-xl font-medium text-black">
-        {{ beer.brand.brandName }}
+        {{ beer.name }}
       </div>
-      <p class="text-slate-500">{{ beer.article.price }} €</p>
-      <p class="text-slate-500">{{ beer.article.shortDescription }}</p>
+      <p class="text-slate-500">
+        <span>{{ beer.price | number: '1.2-2' }}€</span>
+        <span class="pl-1"
+          >({{ beer.pricePerLiter | number: '1.2-2' }}€/L)</span
+        >
+      </p>
+      <p class="text-slate-500">{{ beer.description }}</p>
     </div>
   </shared-card>
 </ng-container>

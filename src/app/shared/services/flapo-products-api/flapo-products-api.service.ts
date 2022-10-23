@@ -3,8 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
 import { environment } from 'src/environments/environment';
-import { Brand } from 'src/app/models/brand';
-import { Beer } from 'src/app/models/beer';
+import { Brand } from 'src/app/shared/models/brand';
+import { Beer } from 'src/app/shared/models/beer';
+import { SortType } from 'src/app/shared/models/sortTypes';
+import { brandToBeers } from '../../utils/mappings/brands-to-beers.mapper';
 
 @Injectable({
   providedIn: 'root',
@@ -12,27 +14,42 @@ import { Beer } from 'src/app/models/beer';
 export class FlapoProductsApiService {
   constructor(private httpClient: HttpClient) {}
 
+  getBeers(sortType?: SortType, maxPricePerLiter?: number): Observable<Beer[]> {
+    return this.getBrands().pipe(
+      map(this.brandsToBeers),
+      map((beers) => this.filterBeersByLiterPrice(beers, maxPricePerLiter)),
+      map((beers) => this.sortBeersByPrice(beers, sortType))
+    );
+  }
+
   getBrands(): Observable<Brand[]> {
     return this.httpClient.get(environment.flapoProductsURL) as Observable<
       Brand[]
     >;
   }
 
-  getBeers(): Observable<Beer[]> {
-    return this.getBrands().pipe(map(this.brandsToBeers));
+  private brandsToBeers(brands: Brand[]): Beer[] {
+    return brands.flatMap((brand) => brandToBeers(brand));
   }
 
-  private brandsToBeers(brands: Brand[]): Beer[] {
-    let beers: Beer[] = [];
-    brands.forEach((brand) => {
-      brand.articles.forEach((article) => {
-        let beer: Beer = {
-          brand,
-          article,
-        };
-        beers.push(beer);
-      });
-    });
+  private filterBeersByLiterPrice(
+    beers: Beer[],
+    maxPricePerLiter?: number
+  ): Beer[] {
+    if (maxPricePerLiter)
+      return beers.filter((beer) => beer.pricePerLiter <= maxPricePerLiter);
     return beers;
+  }
+
+  private sortBeersByPrice(beers: Beer[], sortType?: SortType): Beer[] {
+    if (sortType === SortType.ASCENDING)
+      return beers.sort((a, b) => {
+        return a.price - b.price;
+      });
+    else if (sortType === SortType.DESCENDING)
+      return beers.sort((a, b) => {
+        return b.price - a.price;
+      });
+    else return beers;
   }
 }

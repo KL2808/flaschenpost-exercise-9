@@ -1,0 +1,23 @@
+<button
+  class="hover:bg-[#7FBB3B]/[.3] px-3 py-2 rounded-md text-bold text-base"
+  [class.bg-neutral-200]="
+    currentSortType == SortType.ASCENDING ||
+    currentSortType == SortType.DESCENDING
+  "
+  (click)="toggleSortType()"
+>
+  <img
+    *ngIf="
+      currentSortType == SortType.ASCENDING || currentSortType == undefined
+    "
+    class="w-5 h-5"
+    src="./../assets/sort-numeric-ascending.svg"
+    alt="ASC"
+  />
+  <img
+    *ngIf="currentSortType == SortType.DESCENDING"
+    class="w-5 h-5"
+    src="./../assets/sort-numeric-descending.svg"
+    alt="DES"
+  />
+</button>

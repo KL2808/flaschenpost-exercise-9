@@ -1,0 +1,8 @@
+<button
+  class="hover:bg-[#7FBB3B]/[.3] px-3 py-2 rounded-md text-bold text-base"
+  [class.bg-neutral-200]="currentState"
+  (click)="toggleState()"
+>
+  <span *ngIf="currentState"> 2€ limit </span>
+  <span *ngIf="!currentState"> no limit </span>
+</button>

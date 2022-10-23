@@ -18,7 +18,7 @@ export class FlapoProductsApiService {
     return this.getBrands().pipe(
       map(this.brandsToBeers),
       map((beers) => this.filterBeersByLiterPrice(beers, maxPricePerLiter)),
-      map((beers) => this.sortBeersByPrice(beers, sortType))
+      map((beers) => this.sortBeersByLiterPrice(beers, sortType))
     );
   }
 
@@ -41,14 +41,14 @@ export class FlapoProductsApiService {
     return beers;
   }
 
-  private sortBeersByPrice(beers: Beer[], sortType?: SortType): Beer[] {
+  private sortBeersByLiterPrice(beers: Beer[], sortType?: SortType): Beer[] {
     if (sortType === SortType.ASCENDING)
       return beers.sort((a, b) => {
-        return a.price - b.price;
+        return a.pricePerLiter - b.pricePerLiter;
       });
     else if (sortType === SortType.DESCENDING)
       return beers.sort((a, b) => {
-        return b.price - a.price;
+        return b.pricePerLiter - a.pricePerLiter;
       });
     else return beers;
   }
